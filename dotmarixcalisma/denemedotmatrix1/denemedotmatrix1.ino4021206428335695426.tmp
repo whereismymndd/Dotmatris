@@ -5,7 +5,6 @@ void dotinit(void);
 void dotclear(void);
 void dotyak(byte,byte);
 void dotM(uint16_t);
-void dotMM(uint16_t);
 
 void setup() {
 pinMode(din,OUTPUT);
@@ -18,32 +17,25 @@ digitalWrite(clk,LOW);
 dotinit();
 dotclear();
 dotyak(1,4);// satır sutun
-delay(1000);
- for(byte ct=0;ct<4;ct++) dotMM(0x0100);
-  digitalWrite(cs,HIGH);
-  for(byte ct=0;ct<4;ct++) dotMM(0x0200);
-  digitalWrite(cs,HIGH);
-  for(byte ct=0;ct<4;ct++) dotMM(0x0300);
-  digitalWrite(cs,HIGH);
-  for(byte ct=0;ct<4;ct++) dotMM(0x0400);
-  digitalWrite(cs,HIGH);
-  for(byte ct=0;ct<4;ct++) dotMM(0x0500);
-  digitalWrite(cs,HIGH);
-  for(byte ct=0;ct<4;ct++) dotMM(0x0600);
-  digitalWrite(cs,HIGH);
-  for(byte ct=0;ct<4;ct++) dotMM(0x0700);
-  digitalWrite(cs,HIGH);
-  for(byte ct=0;ct<4;ct++) dotMM(0x0800);
-  digitalWrite(cs,HIGH);
+delay(5000);
 }
 void loop() {
- 
-  
-  dotMM(0x0180); // 0x 0(xxxx),1(adres digit 0 adresi),01(data girişi)
-  dotMM(0x0000);
-  dotMM(0x0000);
-  dotMM(0x0101);
-  digitalWrite(cs,HIGH);
+  dotyak(1,8);
+  dotyak(1,8);
+  dotyak(1,8);
+  dotyak(1,8);
+  delay(500);
+  dotyak(2,8);
+  dotyak(2,8);
+  dotyak(2,8);
+  dotyak(2,8);
+  delay(500);
+  dotyak(3,8);
+  dotyak(3,8);
+  dotyak(3,8);
+  dotyak(3,8);
+  delay(500);
+  dotclear();
   }
  /* dotyak(1,8);  
   dotyak(2,0);
@@ -169,15 +161,4 @@ dotM(0x0700);
 dotM(0x0800);
 }
 
-void dotMM(uint16_t dta){
-digitalWrite(cs,LOW);
-for (i=16;i>0;i=i-1){
-  x=((dta>>(i-1))&0x0001);// 
-  digitalWrite(din,x);
-//  Serial.print(x);
-  digitalWrite(clk,1);
-  digitalWrite(clk,0);
-}
-//Serial.println();
-//digitalWrite(cs,HIGH);
-}
+
